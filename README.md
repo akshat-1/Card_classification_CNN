@@ -11,6 +11,7 @@ This project aims to real time classify playing cards using Convolutional Neural
 - [Usage](#usage)
 - [Dependencies](#dependencies)
 - [References](#references)
+- [Improvements](#improvements)
 
 
 ## Dataset Overview
@@ -87,3 +88,8 @@ Ensure you have the following dependencies installed:
 
 - [Kaggle Dataset](https://www.kaggle.com/datasets/gpiosenka/cards-image-datasetclassification)
 - [Related Paper](https://www.kaggle.com/code/robikscube/train-your-first-pytorch-model-card-classifier)
+
+## improvements
+1. The model is still overfitting , Implement Drouputs or any other regulatization methords preferabelly Data argumentations usign gaussian blurr (L2 loss)
+
+2. Adjust Early stopping critetion
