@@ -94,6 +94,6 @@ Ensure you have the following dependencies installed:
 
 ## improvements
 
-Current test accuracy 83.4%
+Current test accuracy 89.06%
 
 - Implement inception module and residual blocks with identity connections and make model deeper.
