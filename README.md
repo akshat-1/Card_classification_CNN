@@ -31,14 +31,17 @@ The model architecture consists of a series of convolutional layers followed by 
 
 ### Convolutional Layers:
 
-- The model begins with two convolutional layers (`conv1` and `conv2`), which extract features from the input images.
-- Each convolutional layer is followed by a Rectified Linear Unit (ReLU) activation function (`relu1` and `relu2`) to introduce non-linearity to the model.
-- Max-pooling layers (`pool1` and `pool2`) are applied after each convolutional layer to downsample the feature maps and reduce spatial dimensions.
+- The model begins with two convolutional layers (`conv1` and `conv2`), which high level extract features from the input images.
+- The next two convolutional layers (`conv3` and `conv4`) are used to extract low level features
+- Each convolutional layer is followed by a Rectified Linear Unit (ReLU) activation function (`relu1` to `relu5`) to introduce non-linearity to the model, and relu choosen to avoid vanishing gradient problem.
+- Max-pooling layers (`pool1` to `pool3`) are applied after each convolutional layer to downsample the feature maps (by half in both dimensions) and reduce spatial dimensions, except for the last layer
+
+
 
 ### Fully Connected Layers:
 
 - Following the convolutional layers, the feature maps are flattened and passed through two fully connected layers (`fc1` and `fc2`).
-- The first fully connected layer (`fc1`) has 512 neurons and applies a ReLU activation function (`relu3`).
+- The first fully connected layer (`fc1`) has 512 neurons and applies a ReLU activation function (`relu5`).
 - The final fully connected layer (`fc2`) outputs logits for each class without applying an activation function.
 
 ### Input and Output:
@@ -90,6 +93,7 @@ Ensure you have the following dependencies installed:
 - [Related Paper](https://www.kaggle.com/code/robikscube/train-your-first-pytorch-model-card-classifier)
 
 ## improvements
-1. The model is still overfitting , Implement Drouputs or any other regulatization methords preferabelly Data argumentations usign gaussian blurr (L2 loss)
 
-2. Adjust Early stopping critetion
+Current test accuracy 83.4%
+
+- Implement inception module and residual blocks with identity connections and make model deeper.
