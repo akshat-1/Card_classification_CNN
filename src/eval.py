@@ -3,6 +3,7 @@ from glob import glob
 import matplotlib.pyplot as plt
 import torch
 
+
 # Load and preprocess the image
 def preprocess_image(image_path, transform):
     image = Image.open(image_path).convert("RGB")

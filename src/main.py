@@ -12,8 +12,7 @@ from early_stopping import EarlyStopping
 from eval import *
 from params import *
 
-
-#loadng dataset and tokenizing the data
+#loading dataset and tokenizing the data
 dataset = PlayingCardDataset(data_dir='./dataset/train/')
 data_dir = './dataset/train/'
 target_to_class = {v: k for k, v in ImageFolder(data_dir).class_to_idx.items()}
@@ -27,7 +26,6 @@ dataset = PlayingCardDataset(data_dir, transform)
 
 #setting up dataloader
 dataLoader = DataLoader(dataset, batch_size=n_batches, shuffle=True)
-
 
 #model
 model = CardClassifierCNN(num_classes=n_classes)
@@ -47,7 +45,6 @@ test_dataset = PlayingCardDataset(test_folder, transform=transform)
 train_loader = DataLoader(train_dataset, batch_size=n_batches, shuffle=True)
 val_loader = DataLoader(val_dataset, batch_size=n_batches, shuffle=False)
 test_loader = DataLoader(val_dataset, batch_size=n_batches, shuffle=False)
-
 
 num_epochs = epochs
 train_losses, val_losses = [], []
@@ -104,9 +101,6 @@ while epoch < num_epochs and not done:
     done = es(model, val_loss)
     print(f"Early Stopping: {es.status}")
 
-
-
-
 # Calculate the Accuracy of the Model using test data
 model.eval()
 true_labels = []
@@ -120,6 +114,7 @@ with torch.no_grad():
         _, predictions = torch.max(outputs, 1)  # Get the class index with the highest probability
         true_labels.extend(labels.cpu().numpy())
         predicted_labels.extend(predictions.cpu().numpy())
+       
 
 # Calculate accuracy
 accuracy = accuracy_score(true_labels, predicted_labels)
