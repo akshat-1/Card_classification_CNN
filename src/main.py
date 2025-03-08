@@ -1,5 +1,6 @@
 import torch
 import torch.nn as nn
+import torch.nn.init as init
 import torch.optim as optim 
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
@@ -27,11 +28,7 @@ dataset = PlayingCardDataset(data_dir, transform)
 #setting up dataloader
 dataLoader = DataLoader(dataset, batch_size=n_batches, shuffle=True)
 
-#model
-model = CardClassifierCNN(num_classes=n_classes)
-criterion = nn.CrossEntropyLoss()
-# Optimizer
-optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+
 
 #config
 train_folder = './dataset/train/'
@@ -50,18 +47,21 @@ num_epochs = epochs
 train_losses, val_losses = [], []
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+if(device == "cuda:0"):
+    torch.cuda.empty_cache()
+
 
 # Optimize performance on Apple Silicon Processors
 if torch.backends.mps.is_available():
     device = torch.device("mps")
 
 print("Selected device",device)
-
+#model
 model = CardClassifierCNN(num_classes=n_classes)
 model.to(device)
-
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=learning_rate)
+# Optimizer
+optimizer = optim.Adam(model.parameters(), lr=learning_rate, betas= (0.9, 0.999), eps=1e-8, weight_decay=0.01)
 es = EarlyStopping(patience=3)
 
 epoch = 0
@@ -122,3 +122,9 @@ print(f"Test Accuracy: {accuracy * 100:.2f}%")
 
 
 torch.save(model.state_dict(), './params/model.pt')
+
+plt.plot(train_losses, label='Training Loss')
+plt.plot(val_losses, label='Validation Loss')
+plt.legend()
+plt.title("Loss over Epochs")
+plt.show()

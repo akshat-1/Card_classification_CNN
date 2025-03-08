@@ -44,7 +44,7 @@ while True:
         break
 
     # Display the resulting frame
-    cv2.imshow('Camera Feed', frame)
+    # cv2.imshow('Camera Feed', frame)
     
     image_tensor = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
 
@@ -55,7 +55,7 @@ while True:
 
 # Get the index of the maximum element
 
-    
+    visualize_predictions(frame, probabilities, class_names)
     print(class_names[prob_index])
 
     
