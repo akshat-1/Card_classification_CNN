@@ -29,6 +29,8 @@ For more information about the dataset, refer to [this link](https://www.kaggle.
 
 The model architecture consists of a series of convolutional layers followed by fully connected layers. Here's an overview of the model architecture:
 
+<img src="image.png">
+
 ### Convolutional Layers:
 
 - The model begins with two convolutional layers (`conv1` and `conv2`), which high level extract features from the input images.
@@ -64,6 +66,7 @@ The model is trained using the Adam optimizer with the Cross-Entropy Loss functi
 
 For detailed information about the training process, refer to the Training Process section in the code.
 
+<img src="loss.png">
 
 
 ## Usage
@@ -94,6 +97,6 @@ Ensure you have the following dependencies installed:
 
 ## improvements
 
-Current test accuracy 89.06%
+Current test accuracy 92.08%
 
 - Implement inception module and residual blocks with identity connections and make model deeper.
